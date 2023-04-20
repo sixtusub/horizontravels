@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <div class="row">
+        <!-- Jumbotron -->
+        <div class="col-8">
+            <div class="p-5 text-center bg-body-tertiary">
+                <div class="container py-5">
+                    <h1 class="text-body-emphasis">Welcome to Horizon Travels</h1>
+                    <p class="col-lg-8 mx-auto lead">
+                    Your travel is our priority. Plan your trip with us today.
+                    </p>
+                    <button type="button" class="btn btn-primary">Get Started</button>
+                </div>
+            </div>
+        </div>
+        <!-- End of Jumbotron-->
+
+        <!-- Travel booking entry section-->
+        <div class="col-4">
+            <div class="container py-5">
+                <form action="/selectBooking/" method="POST"> 
+                    Select Departure City: 
+                    <select name="departureslist" onchange="getarrivalcity(this.value)">
+                    {% for departure in departurelist %}
+                        <option value="{{departure}}"> {{departure}} </option>	    
+                    {% endfor %} 
+                    </select>       
+                    <br />
+                    Select Arrival City:
+                    <select id="arrivalslist" name="arrivalslist">            
+                    
+                    </select>
+                    <br/>
+                    Select Outgoing Date:
+                    <input type="date" name="outdate" id="outdate" required />
+                    <br/>
+                    Select Return Date:
+                    <input type="date" name="returndate" id="returndate" required />
+                    <br/>
+                    Select Adult Seats:
+                    <input type="number" name="adultseats" id="adultseats" required />
+                    <br/>
+                    Select Child Seats:
+                    <input type="number" name="childseats" id="childseats" value=0 />
+                    <br/>
+                    <input type="submit" class="btn btn-primary" value="Proceed Booking"/>
+                </form> 
+
+            </div>     
+
+            
+            <!-- <div class="row mb-3 text-center">
+                <div class="col-3 themed-grid-col">
+                    
+                    <select class="form-select">
+                        <option disabled selected="selected">Select Origin</option>
+                        <option>Aberdeen</option>
+                        <option>Bristol</option>
+                        <option>Cardiff</option>
+                        <option>London</option>
+                        <option>Manchester</option>
+                        <option>Newcastle</option>
+                    </select>
+                </div>
+
+                <div class="col-3 themed-grid-col">
+                    Destination: 
+                </div>
+                
+                <div class="col-3 themed-grid-col">
+                    Date: 
+                </div>
+
+                <div class="col-3 themed-grid-col"> 
+                    <button type="button" class="btn btn-success">Search</button>
+                </div>
+            </div> -->
+
+        </div>
+        <!-- End of Travel booking entry-->
+    </div>
+{% endblock %}
