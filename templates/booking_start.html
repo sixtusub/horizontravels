@@ -2,55 +2,76 @@
 
 {% block container %}
 
-  <h1>This is the end of the basic booking process</h1> 
-  <h2> booking details </h2>
+<div class="row">
+    <div class="col-12 text-center">
+      <br />
+      <h3>End of the basic booking process</h3> 
+    </div>
+    <form action="/booking_confirm/" method="POST">  
+      
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-4"> 
+        <br>
+        <h4 class="divider"> Booking details </h4>
 
-    <form action="/booking_confirm/" method="POST">   
-        Departure City : {{lookupdata[0]}} <br/>
-        <input type="hidden" name="deptcity" id="deptcity" value="{{lookupdata[0]}}"/>
-        Arrival City : {{lookupdata[1]}} <br/>
-        <input type="hidden" name="arrivcity" id="arrivcity" value="{{lookupdata[1]}}"/>
-        Outward Date : {{lookupdata[2]}} <br/>
-        <input type="hidden" name="outdate" id="outdate" value="{{lookupdata[2]}}"/>
-        Return Date : {{lookupdata[3]}} <br/>
-        <input type="hidden" name="returndate" id="returndate" value="{{lookupdata[3]}}"/>
-        Adult Seats : {{lookupdata[4]}} <br/>
-        <input type="hidden" name="adultseats" id="adultseats" value="{{lookupdata[4]}}"/>
-        Child Seats : {{lookupdata[5]}} <br/>
-        <input type="hidden" name="childseats" id="childseats" value="{{lookupdata[5]}}"/>
+        <strong>Departure City </strong> : {{lookupdata[0]}} <br />
+        <input type="hidden" name="deptcity" id="deptcity" value="{{lookupdata[0]}}" />
+        <strong> Arrival City </strong> : {{lookupdata[1]}} <br />
+        <input type="hidden" name="arrivcity" id="arrivcity" value="{{lookupdata[1]}}" />
+        <strong> Outward Date </strong> : {{lookupdata[2]}} <br />
+        <input type="hidden" name="outdate" id="outdate" value="{{lookupdata[2]}}" />
+        <strong> Return Date  </strong> : {{lookupdata[3]}} <br />
+        <input type="hidden" name="returndate" id="returndate" value="{{lookupdata[3]}}" />
+        <strong> Adult Seats </strong> : {{lookupdata[4]}} <br />
+        <input type="hidden" name="adultseats" id="adultseats" value="{{lookupdata[4]}}" />
+        <strong> Child Seats </strong> : {{lookupdata[5]}} <br />
+        <input type="hidden" name="childseats" id="childseats" value="{{lookupdata[5]}}" />
 
-	  <table border="1"> 
-        <tr>
-            <th> Departure Time </th> <th> Arrival Time </th>  
-            <th> Standard fare </th> <th> Total fare </th> 
-            <th> Select option </th>
-        </tr>
-        
-	    {% for row in resultset %}
-	    <tr> 
-            <td> {{row[2]}} </td> 
-            <td> {{row[4]}} </td> 
-            <td> {{row[5]}} </td>              
-             <td> {{row[6]}} </td>
-             <input type="hidden" name="totalfare" id="totalfare" value="{{row[6]}}"/>
-            <td> <input type="radio" name="bookingchoice" value="{{row[0]}}" checked></td> 
-        </tr> 
-        
-	   {% endfor %} 
-	  </table>  
-    <br/>
-    <H2> Payment </H2>
-      Full name on card: 
-      <input type="text" name="cardname" id="cardname" /> <br/>
-      Card number:
-      <input type="number" name="cardnumber" id="cardnumber" max="9999999999999999" size="16"/> <br/>
-      Card expiry:
-      <input type="text" name="cardexpiry" id="cardexpiry" max="9999" size="4"/> <br/>
-      CVV:
-      <input type="number" name="cvv" id="cvv" max="999" size="3"/> <br/>
-      <input type="submit" value="Confirm Booking and Payment"/>
-    </form> 
-    <a href="/">Go to Home Page</a>
+        <br />
+        <table border="1" class="table"> 
+            <tr>
+                <th scope="col"> Departure Time </th> 
+                <th scope="col"> Arrival Time </th>  
+                <th scope="col"> Standard fare </th> 
+                <th scope="col"> Total fare </th> 
+                <th scope="col"> Select option </th>
+            </tr>
+            
+            {% for row in resultset %}
+            <tr> 
+                  <td scope="row"> {{row[2]}} </td> 
+                  <td> {{row[4]}} </td> 
+                  <td> {{row[5]}} </td>              
+                  <td> {{row[6]}} </td>
+                  <input type="hidden" name="totalfare" id="totalfare" value="{{row[6]}}"/>
+                  <td> <input type="radio" name="bookingchoice" value="{{row[0]}}" checked></td> 
+              </tr>
+            {% endfor %} 
+        </table>  
+
+      </div>
+      
+      <br/>
+      <div class="col-3">
+        <br />
+        <h4> Payment </h4>
+        Full Name on card: 
+        <input required class="form-control" type="text" name="cardname" id="cardname" /> <br/>
+        Card Number:
+        <input required class="form-control" type="number" name="cardnumber" id="cardnumber" max="9999999999999999" size="16"/> <br/>
+        Card Expiry:
+        <input required class="form-control" type="text" name="cardexpiry" id="cardexpiry" max="9999" size="4"/> <br/>
+        CVV:
+        <input required class="form-control" type="number" name="cvv" id="cvv" max="999" size="3"/> 
+        <br/>
+        <input class="btn btn-primary" type="submit" value="Confirm Booking and Payment"/>
+      </div>
+    </div>
+
+    </form>
+
+</div>
 
 {% endblock %}
 

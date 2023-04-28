@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
 
 {% block container %}
+<div class="row">
+  <div class="col-12 text-center">
+    <br />
+    <h3>This is start of the basic booking process</h3> 
+  </div>
+  <div class="row">
+    <div class="col-5">&nbsp;</div>
+    <div class="col-6">
+      <!--[journeyid, departcity, arrivalcity, outdate, returndate, adultseats, childseats, totalfare, bookingid, deptTime, arrivTime]-->
+      <form action="/dumpsVar/" method="POST">
+          Booking ID: {{resultset[8]}} <br/>
+          Departure City : {{resultset[1]}} <br/>
+          Departure Date : {{resultset[3]}} <br/>
+          Departure Time : {{resultset[9]}} <br/>
+          Arrival City : {{resultset[2]}} <br/>  
+          Arrival Time : {{resultset[10]}} <br/>
+          Return Date : {{resultset[4]}} <br/>
+          Adult Seats : {{resultset[5]}} <br/>
+          Child Seats : {{resultset[6]}} <br/>
+          Total Fare : {{resultset[7]}} <br/>
+          Payment: Card ending with ****** {{cardnumber}} <br/>
+          <br />
+          <input type="hidden" name="totalfare" value="{{resultset[7]}}" /> 
+          <input type="hidden" name="bookingid" value="{{resultset[8]}}" />   
+          <input class="btn btn-primary" type="submit" value="Proceed to further actions - to dumpsVar" /> 
+      </form>
+    </div>
 
-  <h1>This is start of the basic booking process</h1> 
-  <!--[journeyid, departcity, arrivalcity, outdate, returndate, adultseats, childseats, totalfare, bookingid, deptTime, arrivTime]-->
-  <form action="/dumpsVar/" method="POST">
-      Booking ID: {{resultset[8]}} <br/>
-      Departure City : {{resultset[1]}} <br/>
-      Departure Date : {{resultset[3]}} <br/>
-      Departure Time : {{resultset[9]}} <br/>
-      Arrival City : {{resultset[2]}} <br/>  
-      Arrival Time : {{resultset[10]}} <br/>
-      Return Date : {{resultset[4]}} <br/>
-      Adult Seats : {{resultset[5]}} <br/>
-      Child Seats : {{resultset[6]}} <br/>
-      Total Fare : {{resultset[7]}} <br/>
-      Payment: Card ending with ****** {{cardnumber}} <br/>
-      <input type="hidden" name="totalfare" value="{{resultset[7]}}" /> 
-      <input type="hidden" name="bookingid" value="{{resultset[8]}}" />   
-      <input type="submit" value="Proceed to further actions - to dumpsVar" /> 
-  </form>  
-  <a href="/">Go to Home Page</a>
- 
+  </div>
+
+ </div>
   {% endblock %}
 
 

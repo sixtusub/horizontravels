@@ -19,33 +19,38 @@
         <!-- Travel booking entry section-->
         <div class="col-4">
             <div class="container py-5">
-                <form action="/selectBooking/" method="POST"> 
-                    Select Departure City: 
-                    <select name="departureslist" onchange="getarrivalcity(this.value)">
-                    {% for departure in departurelist %}
-                        <option value="{{departure}}"> {{departure}} </option>	    
-                    {% endfor %} 
-                    </select>       
-                    <br />
-                    Select Arrival City:
-                    <select id="arrivalslist" name="arrivalslist">            
+
+                <div class="card" style="width: 18rem;">
                     
-                    </select>
-                    <br/>
-                    Select Outgoing Date:
-                    <input type="date" name="outdate" id="outdate" required />
-                    <br/>
-                    Select Return Date:
-                    <input type="date" name="returndate" id="returndate" required />
-                    <br/>
-                    Select Adult Seats:
-                    <input type="number" name="adultseats" id="adultseats" required />
-                    <br/>
-                    Select Child Seats:
-                    <input type="number" name="childseats" id="childseats" value=0 />
-                    <br/>
-                    <input type="submit" class="btn btn-primary" value="Proceed Booking"/>
-                </form> 
+                    <div class="card-body">
+                        <h5 class="card-title">Book A Trip</h5>
+                        <p class="card-text">
+                            
+                            <form action="/selectBooking/" method="POST" class="form-control"> 
+                                Select Departure City:
+                                <select required class="form-control" name="departureslist" onchange="getarrivalcity(this.value)">
+                                {% for departure in departurelist %}
+                                    <option value="{{departure}}"> {{departure}} </option>	    
+                                {% endfor %} 
+                                </select>  
+                                Select Arrival City:
+                                <select required class="form-control" id="arrivalslist" name="arrivalslist">            
+                                
+                                </select>
+                                Select Outgoing Date:
+                                <input class="form-control" type="date" name="outdate" id="outdate" required />
+                                Select Return Date:
+                                <input class="form-control" type="date" name="returndate" id="returndate" required />
+                                Select Adult Seats:
+                                <input class="form-control" type="number" name="adultseats" id="adultseats" required />
+                                Select Child Seats:
+                                <input class="form-control" type="number" name="childseats" id="childseats" value=0 />
+                                <br>
+                                <input type="submit" class="btn btn-primary" value="Proceed Booking"/>
+                            </form>
+                        </p>
+                    </div>
+                  </div> 
 
             </div>     
 

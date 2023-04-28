@@ -139,14 +139,14 @@ def booking_confirm():
 def dumpVar():
 	if request.method == 'POST':
 		result = request.form
-		output = "<H2>Data Received: </H2></br>"
+		output = "<h2>Data Received: </h2></br>"
 		output += "Number of Data Fields : " + str(len(result))
 		for key in list(result.keys()):
 			output = output + " </br> " + key + " : " + result.get(key)
 		return output
 	else:
 		result = request.args
-		output = "<H2>Data Received: </H2></br>"
+		output = "<h2>Data Received: </h2></br>"
 		output += "Number of Data Fields : " + str(len(result))
 		for key in list(result.keys()):
 			output = output + " </br> " + key + " : " + result.get(key)
@@ -154,48 +154,3 @@ def dumpVar():
 
 if __name__ == '__main__':
    app.run (debug = True)
-
-
-
-
-# from flask import Flask, render_template, abort
-
-# app = Flask(__name__)
-
-# PRODUCTS = {
-#     'iphone': {
-#         'name': 'iPhone 5S',
-#         'category': 'Phones',
-#         'price': 699,
-#     },
-#     'galaxy': {
-#         'name': 'Samsung Galaxy 5',
-#         'category': 'Phones',
-#         'price': 649,
-#     },
-#     'ipad-air': {
-#         'name': 'iPad Air',
-#         'category': 'Tablets',
-#         'price': 649,
-#     },
-#     'ipad-mini': {
-#         'name': 'iPad Mini',
-#         'category': 'Tablets',
-#         'price': 549
-#     }
-# }
-
-# @app.route('/')
-# @app.route('/home')
-# def home():
-#     return render_template('index.html', products=PRODUCTS)
-
-# @app.route('/product/<key>')
-# def product(key):
-#     product = PRODUCTS.get(key)
-#     if not product:
-#         abort(404)
-#     return render_template('product.html', product=product)
-       
-# if __name__ == '__main__':
-#     app.run()
