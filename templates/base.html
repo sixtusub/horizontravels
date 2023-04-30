@@ -70,8 +70,20 @@
                 
                         <!-- Login and Sign up section-->
                         <div class="text-end">
-                          <button type="button" class="btn btn-outline-light me-2">Login</button>
-                          <button type="button" class="btn btn-warning">Sign up</button>
+                          {% if usertype == 'admin' %}
+                              <a href="/adminfeatures/"  class="btn btn-outline-light me-2">Admin Features</a> 
+                              <a href='/logout/'  class="btn btn-warning"> Logout </a> 
+                          {% endif %}
+                          {% if usertype == 'standard' %}
+                              <a href="/userfeatures/"  class="btn btn-outline-light me-2">User Features</a> 
+                              <a href='/logout/' class="btn btn-warning"> Logout </a>
+                          {% endif %}        
+                          <a href='/index/' class="btn btn-outline-light me-2"> Main </a>
+
+                          <a href="/login/" type="button" class="btn btn-outline-light me-2">Login</a>
+                          <a href="/register/" type="button" class="btn btn-warning">Sign up</a>
+
+
                         </div>
                         <!-- End of Login/Sign up-->
                       </div>

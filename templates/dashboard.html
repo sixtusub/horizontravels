@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+    <html><head></head><body>
+        <h1 style='color:green;'>Welcome {{username}}.</h1>        
+        Here you can perform authorised operations <br/>
+        data: {{data}} <br/>      
+        {% if usertype == 'admin' %}
+            <a href="/adminfeatures/">Admin Features</a><br/>
+            <a href='/logout/'> Logout </a> <br/>
+        {% endif %}
+        {% if usertype == 'standard' %}
+            <a href="/userfeatures/">User Features</a><br/>
+            <a href='/logout/'> Logout </a> <br/>
+        {% endif %}        
+        <a href='/index/'> Return to main page </a> <br/>
+    </body>
+</html>
+
