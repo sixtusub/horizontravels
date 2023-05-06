@@ -45,79 +45,80 @@
             return false;
         }
     
-      </script>
+    </script>
   </head>
   <body>
-    <div>
-            <!-- This is the header and navigation section of the page -->
-            <div>
-                <header class="p-3 text-bg-dark">
-                    <div class="container">
-                      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                          Horizon Travels
-                        </a>
-                
-                        <!-- Navigation / Menu Section -->
-                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center justify-content-md-between mb-md-0">
-                          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                          <li><a href="#" class="nav-link px-2 text-white">Services</a></li>
-                          <li><a href="#" class="nav-link px-2 text-white">Bookings</a></li>
-                          <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
-                        </ul>
-                        <!-- End of Menu Section -->
-                
-                        <!-- Login and Sign up section-->
-                        <div class="text-end">
-                          {% if usertype == 'admin' %}
-                              <a href="/adminfeatures/"  class="btn btn-outline-light me-2">Admin Features</a> 
-                              <a href='/logout/'  class="btn btn-warning"> Logout </a> 
-                          {% endif %}
-                          {% if usertype == 'standard' %}
-                              <a href="/userfeatures/"  class="btn btn-outline-light me-2">User Features</a> 
-                              <a href='/logout/' class="btn btn-warning"> Logout </a>
-                          {% endif %}        
-                          <a href='/index/' class="btn btn-outline-light me-2"> Main </a>
+      <!-- This is the header and navigation section of the page -->
+    <header class="p-4 text-bg-dark">
+        <!-- <div class="container"> -->
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <strong>Horizon Travels</strong>
+            </a>
+    
+            <!-- Navigation / Menu Section -->
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center justify-content-md-between mb-md-0">
+              <!-- <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Services</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Bookings</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Contact</a></li> -->
+            </ul>
+            <!-- End of Menu Section -->
+    
+            <!-- Login and Sign up section-->
+            <div class="text-end">
+              {% if usertype == 'admin' %}
+                <a href='/' class="btn btn-outline-light me-2"> Home </a>
+                <a href="/adminfeatures/"  class="btn btn-outline-light me-2">Admin</a> 
+                <a href='/logout/'  class="btn btn-warning"> Logout </a> 
+              {% elif usertype == 'standard' %}
+                Hi,  {{username}} &nbsp;
+                <a href='/' class="btn btn-outline-light me-2"> Home </a>
+                <a href="/userfeatures/"  class="btn btn-outline-light me-2">Bookings</a> 
+                <a href='/logout/'  class="btn btn-warning"> Logout </a> 
+              {% else %}
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center justify-content-md-between mb-md-0">
+                    <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Services</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
+                    <li><a href="/login/" class="nav-link px-2 text-white btn btn-primary">Login</a></li>
+                </ul>
+              {% endif %}
 
-                          <a href="/login/" type="button" class="btn btn-outline-light me-2">Login</a>
-                          <a href="/register/" type="button" class="btn btn-warning">Sign up</a>
-
-
-                        </div>
-                        <!-- End of Login/Sign up-->
-                      </div>
-                    </div>
-                  </header>
-            </div>
-            <!-- End of header section-->
-
-            <!-- Jumbotron -->
-            <div>
-                {% block container %}{% endblock %}
-            </div>
-            <!-- End of Travel booking entry-->
-
-            <!-- Footer Section-->
-            <div>
-                <div class="container">
-                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                      <div class="col-md-4 d-flex align-items-center">
-                        <span class="mb-3 mb-md-0 text-body-secondary">Horizon Travels © 2023 Sixtus Tech Inc</span>
-                      </div>
                   
-                      <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
-                        <li class="ms-3"><a class="text-body-secondary" href="#">Home</a></li>
-                        <li class="ms-3"><a class="text-body-secondary" href="#">About Us</a></li>
-                        <li class="ms-3"><a class="text-body-secondary" href="#">Services</a></li>
-                        <li class="ms-3"><a class="text-body-secondary" href="#">Bookings</a></li>
-                        <li class="ms-3"><a class="text-body-secondary" href="#">Contact Us</a></li>
-                      </ul>
-                    </footer>
-                </div>
+              <!-- <a href="/login/" type="button" class="btn btn-outline-light me-2">Login</a>
+              <a href="/register/" type="button" class="btn btn-warning">Sign up</a> -->
+
             </div>
-            <!--End of Footer Section-->
-            
+            <!-- End of Login/Sign up-->
+          </div>
+        <!-- </div> -->
+    </header>
+      <!-- End of header section-->
+
+      <!-- Jumbotron -->
+      <!-- <div> -->
+          {% block container %}{% endblock %}
+      <!-- </div> -->
+      <!-- End of Travel booking entry-->
+
+      <!-- Footer Section-->
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-body-secondary">Horizon Travels © 2023 Sixtus Tech Inc</span>
+          </div>
+      
+          <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="/">Home</a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#">About Us</a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#">Services</a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#">Contact Us</a></li>
+          </ul>
+        </footer>
     </div>
+      <!--End of Footer Section-->
   </body>
 </html>

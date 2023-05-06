@@ -1,88 +1,77 @@
 {% extends 'base.html' %}
 
 {% block container %}
-    <div class="row">
-        <!-- Jumbotron -->
-        <div class="col-8 col-md-12">
-            <div class="p-5 text-center bg-body-tertiary">
-                <div class="container py-5">
-                    <h1 class="text-body-emphasis">Welcome to Horizon Travels</h1>
-                    <p class="col-lg-8 mx-auto lead">
-                    Your travel is our priority. Plan your trip with us today.
-                    </p>
-                    <button type="button" class="btn btn-primary">Get Started</button>
-                </div>
-            </div>
-        </div>
-        <!-- End of Jumbotron-->
-
-        <!-- Travel booking entry section-->
-        <div class="col-4 col-md-12">
-            <div class="container py-5">
-
-                <div class="card" style="width: 18rem;">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">Book A Trip</h5>
-                        <p class="card-text">
-                            
-                            <form action="/selectBooking/" method="POST" class="form-control"> 
-                                Select Departure City:
-                                <select required class="form-control" name="departureslist" onchange="getarrivalcity(this.value)">
-                                {% for departure in departurelist %}
-                                    <option value="{{departure}}"> {{departure}} </option>	    
-                                {% endfor %} 
-                                </select>  
-                                Select Arrival City:
-                                <select required class="form-control" id="arrivalslist" name="arrivalslist">            
-                                
-                                </select>
-                                Select Outgoing Date:
-                                <input class="form-control" type="date" name="outdate" id="outdate" required />
-                                Select Return Date:
-                                <input class="form-control" type="date" name="returndate" id="returndate" required />
-                                Select Adult Seats:
-                                <input class="form-control" type="number" name="adultseats" id="adultseats" required />
-                                Select Child Seats:
-                                <input class="form-control" type="number" name="childseats" id="childseats" value=0 />
-                                <br>
-                                <input type="submit" class="btn btn-primary" value="Proceed Booking"/>
-                            </form>
+    <div class="container bg-img">
+        <div class="row">
+            <!-- Jumbotron -->
+            <div class="col-md-6 col-sm-12">
+                <div class="p-5 text-center bg-body-tertiary">
+                    <div class="container py-5">
+                        <h1 class="text-body-emphasis">Welcome to Horizon Travels</h1>
+                        <p class="col-lg-8 mx-auto lead">
+                        Your travel is our priority. Plan your trip with us today.
                         </p>
                     </div>
-                  </div> 
-
-            </div>     
-
-            
-            <!-- <div class="row mb-3 text-center">
-                <div class="col-3 themed-grid-col">
-                    
-                    <select class="form-select">
-                        <option disabled selected="selected">Select Origin</option>
-                        <option>Aberdeen</option>
-                        <option>Bristol</option>
-                        <option>Cardiff</option>
-                        <option>London</option>
-                        <option>Manchester</option>
-                        <option>Newcastle</option>
-                    </select>
                 </div>
+            </div>
+            <!-- End of Jumbotron-->
 
-                <div class="col-3 themed-grid-col">
-                    Destination: 
-                </div>
-                
-                <div class="col-3 themed-grid-col">
-                    Date: 
-                </div>
+            <!-- Travel booking entry section-->
+            <div class="col-md-6 col-sm-12">
+                <div class="container py-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Book A Trip</h5>
+                            <p class="card-text">
+                                <form action="/selectBooking/" method="POST" class="form-control"> 
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            Select Departure City:
+                                            <select required class="form-control" name="departureslist" onchange="getarrivalcity(this.value)">
+                                            {% for departure in departurelist %}
+                                                <option value="{{departure}}"> {{departure}} </option>	    
+                                            {% endfor %} 
+                                            </select>  
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            Select Arrival City:
+                                            <select required class="form-control" id="arrivalslist" name="arrivalslist"> 
 
-                <div class="col-3 themed-grid-col"> 
-                    <button type="button" class="btn btn-success">Search</button>
-                </div>
-            </div> -->
+                                            </select>
+                                        </div>
 
+                                        <div class="col-md-6 col-sm-12">
+                                            Select Outgoing Date:
+                                            <input class="form-control" type="date" name="outdate" id="outdate" required />
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            Select Return Date:
+                                            <input class="form-control" type="date" name="returndate" id="returndate" required />
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12">
+                                            Select Adult Seats:
+                                            <input class="form-control" type="number" name="adultseats" id="adultseats" required />
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 mb-4">
+                                            Select Child Seats:
+                                            <input class="form-control" type="number" name="childseats" id="childseats" value=0 />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <input type="submit" class="btn btn-primary" value="Proceed Booking"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                    </div> 
+                </div>     
+
+            </div>
+            <!-- End of Travel booking entry-->
         </div>
-        <!-- End of Travel booking entry-->
     </div>
 {% endblock %}

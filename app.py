@@ -9,6 +9,8 @@ from functools import wraps
 
 app = Flask(__name__)
 
+app.url_map.strict_slashes = False
+
 app.secret_key = 'sixtussecretkey'     #secret keey for sessions
 
 # / or /index creates a route that loads the main page where 
@@ -37,7 +39,7 @@ def index():
 		#print('SELECT statement executed successfully.')             
 		rows = dbcursor.fetchall()                                    
 		dbcursor.close()              
-		conn.close() #Connection must be 
+		conn.close() # Connection must be closed
 		cities = []
 		for city in rows:
 			city = str(city).strip("(")
@@ -49,6 +51,40 @@ def index():
 	else:
 		print('DB connection Error')
 		return 'DB Connection Error'
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:            
+            print("You need to login first")
+            #return redirect(url_for('login', error='You need to login first'))
+            return render_template('login.html', error='You need to login first')    
+    return wrap
+
+def admin_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if ('logged_in' in session) and (session['usertype'] == 'admin'):
+            return f(*args, **kwargs)
+        else:            
+            print("You need to login first as admin user")
+            #return redirect(url_for('login', error='You need to login first as admin user'))
+            return render_template('login.html', error='You need to login first as admin user')    
+    return wrap
+
+def standard_user_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if ('logged_in' in session) and (session['usertype'] == 'standard'):
+            return f(*args, **kwargs)
+        else:            
+            print("You need to login first as standard user")
+            #return redirect(url_for('login', error='You need to login first as standard user'))
+            return render_template('login.html', error='You need to login first as standard user')    
+    return wrap
+
 	
 @app.route ('/returncity/', methods = ['POST', 'GET'])
 def ajax_returncity():   
@@ -72,6 +108,7 @@ def ajax_returncity():
 			return jsonify(returncities='DB Connection Error')
 
 @app.route ('/selectBooking/', methods = ['POST', 'GET'])
+@login_required
 def selectBooking():
 	if request.method == 'POST':
 		#print('Select booking initiated')
@@ -106,6 +143,7 @@ def selectBooking():
 		else:
 			print('DB connection Error')
 			return redirect(url_for('index'))
+
 
 	
 @app.route ('/booking_confirm/', methods = ['POST', 'GET'])
@@ -252,7 +290,7 @@ def login():
                         data = dbcursor.fetchone()
                         #print(data[0])
                         if dbcursor.rowcount < 1: #this mean no user exists                         
-                            error = "User / password does not exist, login again"
+                            error = "User / Password does not exist, try again"
                             return render_template("login.html", error=error)
                         else:                            
                             #data = dbcursor.fetchone()[0] #extracting password   
@@ -261,67 +299,37 @@ def login():
                                 session['logged_in'] = True     #set session variables
                                 session['username'] = request.form['username']
                                 session['usertype'] = str(data[1])                          
-                                print("You are now logged in")                                
-                                return render_template('dashboard.html', \
-                                    username=username, data='this is user specific data',\
-                                         usertype=session['usertype'])
+                                print("You are now logged in")
+          
+                                dbcursor.execute('SELECT DISTINCT deptCity FROM routes;')    
+                                rows = dbcursor.fetchall()                                    
+                                dbcursor.close()              
+                                conn.close() 
+                                cities = []
+                                for city in rows:
+                                    city = str(city).strip("(")
+                                    city = str(city).strip(")")
+                                    city = str(city).strip(",")
+                                    city = str(city).strip("'")
+                                    cities.append(city)
+
+                                return render_template('index.html', 
+                                                        departurelist=cities, \
+                                                        username=username, \
+                                                        data='this is user specific data', \
+                                                        usertype=session['usertype'])
+                    
                             else:
-                                error = "Invalid credentials username/password, try again."                               
+                                error = "Invalid credentials username/password, try again."                             
                     gc.collect()
                     print('login start 1.10')
                     return render_template("login.html", form=form, error=error)
     except Exception as e:                
-        error = str(e) + " <br/> Invalid credentials, try again."
+        error = str(e) + " <br /> Invalid credentials, try again."
         return render_template("login.html", form=form, error = error)   
     
     return render_template("login.html", form=form, error = error)
             
-#https://pythonprogramming.net/decorator-wrappers-flask-tutorial-login-required/?completed=/flask-user-log-in-system-tutorial/
-#Now that we can have users register and log in, we're also allowing them 
-# to log out. It makes a little sense to not let users log out, unless 
-# they are logged in! Here, we define the function, where the parameter is f, 
-# which is convention for the fact that it wraps a function. Then, we define 
-# the wrapper. 
-# #Our wrapper here is simple, it just simply checks if the user 
-# has a "logged_in" in their session. If so, great. If not, they should get   
-# a message and a redirect to the login page.
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:            
-            print("You need to login first")
-            #return redirect(url_for('login', error='You need to login first'))
-            return render_template('login.html', error='You need to login first')    
-    return wrap
-
-#We also write a wrapper for admin user(s). It will check with the user is 
-# logged in and the usertype is admin and only then it will allow user to
-# perform admin functions
-def admin_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if ('logged_in' in session) and (session['usertype'] == 'admin'):
-            return f(*args, **kwargs)
-        else:            
-            print("You need to login first as admin user")
-            #return redirect(url_for('login', error='You need to login first as admin user'))
-            return render_template('login.html', error='You need to login first as admin user')    
-    return wrap
-
-#We also write a wrapper for standard user(s). It will check with the usertype is 
-#standard and user is logged in, only then it will allow user to perform standard user functions
-def standard_user_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if ('logged_in' in session) and (session['usertype'] == 'standard'):
-            return f(*args, **kwargs)
-        else:            
-            print("You need to login first as standard user")
-            #return redirect(url_for('login', error='You need to login first as standard user'))
-            return render_template('login.html', error='You need to login first as standard user')    
-    return wrap
 
 #/logout is to log out of the system.
 # Here we us @login_required wrapper ... this means that a user can only 
@@ -332,7 +340,7 @@ def logout():
     session.clear()    #clears session variables
     print("You have been logged out!")
     gc.collect()
-    return render_template('mainpage.html', optionalmessage='You have been logged out')
+    return render_template('login.html', optionalmessage='You have been logged out')
 
 #/userfeatures is loaded for standard users
 # Here we us @standard_user_login_required wrapper ... 
@@ -394,7 +402,16 @@ def generate_user_record():
         <h1> this is User record for user {} </h1>
         <a href='/userfeatures')> Go to User Features page </a>
     """.format(session['username'])
-   
+
+
+
+@app.route ('/manage_booking/', methods = ['POST', 'GET'])
+@login_required
+@standard_user_required
+def manage_booking():
+     print('User records')
+     return render_template('manage_booking.html')
+
 
 if __name__ == '__main__':
    app.run (debug = True)
