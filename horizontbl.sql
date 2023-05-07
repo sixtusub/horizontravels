@@ -34,12 +34,13 @@ INSERT INTO routes VALUES
   
 CREATE TABLE bookings (
   idBooking INT NOT NULL auto_increment, 
+  userId INT NOT NULL,
   deptDate  datetime NOT NULL,   
   arrivDate datetime NOT NULL, 
   idRoutes INT NOT NULL,  
   noOfSeats INT NOT NULL default 1, 
   totFare Double NOT NULL,  
-  FOREIGN KEY (idRoutes) REFERENCES routes (idRoutes), 
+  FOREIGN KEY (idRoutes) REFERENCES routes (idRoutes),
   PRIMARY KEY (idBooking)
 );
 
