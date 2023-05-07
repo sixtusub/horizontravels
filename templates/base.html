@@ -75,14 +75,13 @@
               {% elif usertype == 'standard' %}
                 Hi,  {{username}} &nbsp;
                 <a href='/' class="btn btn-outline-light me-2"> Home </a>
-                <a href="/userfeatures/"  class="btn btn-outline-light me-2">Bookings</a> 
+                <a href="/manage_booking/"  class="btn btn-outline-light me-2">Bookings</a> 
                 <a href='/logout/'  class="btn btn-warning"> Logout </a> 
               {% else %}
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center justify-content-md-between mb-md-0">
                     <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Services</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
                     <li><a href="/login/" class="nav-link px-2 text-white btn btn-primary">Login</a></li>
                 </ul>
               {% endif %}

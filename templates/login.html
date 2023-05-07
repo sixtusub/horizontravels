@@ -126,7 +126,9 @@
         </h1>
         <h1 class="h3 mb-3 fw-normal">Please Login</h1>
         <br>
-        <p style="color:red;"> {{error}} </p>
+        {% if error %}
+        <p style="color:red;" class="alert alert-danger"> {{error}} </p>
+        {% endif %}
 
         <form action="/login/" method="POST">
             <div class="form-floating">

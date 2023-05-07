@@ -2,6 +2,14 @@
 
 {% block container %}
     <div class="container bg-img">
+        {% if message %}
+        <div class="row text-center"> 
+            <div class="col-12 alert alert-success"> 
+                {{ message }}
+            </div>
+        </div>
+        {% endif %}
+        
         <div class="row">
             <!-- Jumbotron -->
             <div class="col-md-6 col-sm-12">
