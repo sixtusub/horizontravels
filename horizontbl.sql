@@ -45,6 +45,3 @@ CREATE TABLE bookings (
 );
 
 CREATE table users (id INTEGER NOT NULL AUTO_INCREMENT, username VARCHAR(64) NOT NULL UNIQUE , email VARCHAR(120) NOT NULL UNIQUE, password_hash VARCHAR(128), usertype VARCHAR(8) DEFAULT 'standard', primary key (id));
-INSERT INTO users VALUES 
-	('test','123','test@test.com', 'standard'),
-	('sixtus','123456','sixtus@gmail.com', 'standard');
